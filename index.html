@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <title>模拟 vue 的双向数据绑定</title>
+</head>
+<body>
+  <div id="app">
+    <h1 v-on:click="getContent">{{title}}</h1>
+    <h2 v-on:click="getContent">{{name}}</h2>
+    <h3 v-on:click="getContent">{{age}}</h3>
+    <b>message:</b> <input type="text" v-model="message">
+    <br />
+    <b>message2:</b> <input type="text" class="message2">
+  </div>
+  <script src="./observer.js"></script>
+  <script src="./watcher.js"></script>
+  <script src="./compile.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    var selfVue = new SelfVue({
+      el: '#app',
+      data: {
+        title: 'hello world',
+        name: 'lxfriday',
+        age: 0,
+        message: '',
+      },
+      // 自己设定的方法
+      methods: {
+        getContent(event) {
+          // 绑定 this
+          // event.preventDefault();
+          event.stopPropagation();
+          console.log(event);
+        },
+      },
+      // 声明周期函数
+      beforeCreate() {
+        console.log('before create');
+      },
+      created() {
+        console.log('created');
+        setTimeout(() => {
+          this.title = '你好';
+        }, 1000);
+        setTimeout(() => {
+          this.name = '止水、';
+        }, 1000);
+        setTimeout(() => {
+          this.age = 23;
+        }, 1000);
+      },
+      beforeMount() {
+        console.log('beforeMount');
+      },
+      mounted() {
+        console.log('mounted');
+      },
+    });
+  </script>
+</body>
+</html>

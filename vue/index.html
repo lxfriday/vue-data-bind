@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <title>Vue 原始代码</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{title}}</h1>
+    <h2>{{name}}</h2>
+    <h3>{{age}}</h3>
+    <h3 @click="getUserName">getName1： {{getName1}}</h3>
+  </div>
+  <script src="./vue.min.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    var vue1 = new Vue({
+      el: '#app',
+      data: {
+        title: 'hello world',
+        name: 'lxfriday',
+        age: 0,
+        count: 1,
+      },
+      computed: {
+        getName1() {
+          return this.count;
+        },
+      },
+      // 自己设定的方法
+      methods: {
+        getUserName() {
+          // 绑定 this
+          console.log(this.name);
+        },
+        getName() {
+          this.getUserName();
+        },
+      },
+      // 声明周期函数
+      beforeCreate() {
+        console.log('before create');
+      },
+      created() {
+        setTimeout(() => {
+          this.title = '你好';
+        }, 1000);
+        setTimeout(() => {
+          this.name = '止水、';
+        }, 1000);
+        setTimeout(() => {
+          this.age = 23;
+        }, 1000);
+      },
+      mounted() {
+        console.log('mounted');
+        this.getName();
+        setInterval(() => this.count++, 1000);
+      },
+    });
+  </script>
+</body>
+</html>

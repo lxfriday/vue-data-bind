@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <title>模拟 vue 的双向数据绑定</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{title}}</h1>
+    <h2>{{name}}</h2>
+  </div>
+  <script src="./observer.js"></script>
+  <script src="./watcher.js"></script>
+  <script src="./compile.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    var selfVue = new SelfVue({
+      el: '#app',
+      data: {
+        title: 'hello !',
+        name: 'lxfriday',
+      },
+    });
+    // 过1s之后修改值
+    setTimeout(() => {
+      selfVue.title = '你好';
+    }, 1000);
+    setTimeout(() => {
+      selfVue.name = '止水、';
+    }, 1000);
+  </script>
+</body>
+</html>

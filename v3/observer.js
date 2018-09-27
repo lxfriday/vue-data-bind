@@ -47,6 +47,9 @@ function Dep() {
   this.subs = [];
 }
 
+
+// 会对所有绑定该属性的元素下发通知
+// 将监听器放到队列里面
 Dep.prototype = {
   constructor: Dep,
   addSub(sub) {

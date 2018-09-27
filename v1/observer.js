@@ -43,6 +43,8 @@ function observe(value, vm) {
   return new Observer(value);
 }
 
+// 会对所有绑定该属性的元素下发通知
+// 将监听器放到队列里面
 function Dep() {
   this.subs = [];
 }
